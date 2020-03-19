@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "6C031719-B5A6-4F95-ADCD-4A94790B7886"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EvoMobileLab/NoteViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "NoteViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - a233d41d4dc76ab0"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EvoMobileLab.NoteViewController.titleLabel.getter : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "EvoMobileLab"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - d4cb29270bf2cea4"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EvoMobileLab.NoteViewController.titleLabel.setter : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "EvoMobileLab"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - a31aae9e6074db5"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EvoMobileLab.NoteViewController.titleLabel.modify : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "EvoMobileLab"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "67">
+               </Location>
+               <Location
+                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - 8248e2ac559eb795"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EvoMobileLab.NoteViewController.titleLabel.modify : Swift.Optional&lt;__C.UILabel&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "EvoMobileLab"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - 9cb5c6a4ffe34880"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EvoMobileLab.NoteViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; EvoMobileLab.NoteViewController"
+                  moduleName = "EvoMobileLab"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "182">
+               </Location>
+               <Location
+                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - 4c3a7057081819bb"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EvoMobileLab.NoteViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;EvoMobileLab.NoteViewController&gt;"
+                  moduleName = "EvoMobileLab"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "119">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

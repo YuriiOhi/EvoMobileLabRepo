@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+// Notes Adding and Saving VC
 class EntryViewController: UIViewController {
 
     @IBOutlet weak var titleField: UITextField!
