@@ -16,6 +16,7 @@
 		52703392241F609800694C46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52703390241F609800694C46 /* LaunchScreen.storyboard */; };
 		527033C12421FC2A00694C46 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527033C02421FC2A00694C46 /* NoteViewController.swift */; };
 		527033C32421FC6B00694C46 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527033C22421FC6B00694C46 /* EntryViewController.swift */; };
+		5275E18F242C8C5C003A457E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275E18E242C8C5C003A457E /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		52703393241F609800694C46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		527033C02421FC2A00694C46 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		527033C22421FC6B00694C46 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
+		5275E18E242C8C5C003A457E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 		52703376241F609700694C46 = {
 			isa = PBXGroup;
 			children = (
+				5275E18D242C8C2F003A457E /* New Group */,
 				52703381241F609700694C46 /* EvoMobileLab */,
 				52703380241F609700694C46 /* Products */,
 			);
@@ -74,6 +77,14 @@
 				5270338B241F609700694C46 /* EvoMobileLab.xcdatamodeld */,
 			);
 			path = EvoMobileLab;
+			sourceTree = "<group>";
+		};
+		5275E18D242C8C2F003A457E /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				5275E18E242C8C5C003A457E /* Model.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +162,7 @@
 				52703383241F609700694C46 /* AppDelegate.swift in Sources */,
 				5270338D241F609700694C46 /* EvoMobileLab.xcdatamodeld in Sources */,
 				527033C12421FC2A00694C46 /* NoteViewController.swift in Sources */,
+				5275E18F242C8C5C003A457E /* Model.swift in Sources */,
 				52703385241F609700694C46 /* SceneDelegate.swift in Sources */,
 				527033C32421FC6B00694C46 /* EntryViewController.swift in Sources */,
 			);
