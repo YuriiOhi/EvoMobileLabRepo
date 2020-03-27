@@ -18,7 +18,10 @@ class EntryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleField.becomeFirstResponder()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSave))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(didTapSave))
     }
     
     @objc func didTapSave() {

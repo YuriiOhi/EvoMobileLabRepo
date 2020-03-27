@@ -20,28 +20,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         title = "Notes"
     }
-    
+    //
     @IBAction func didTapNewNote() {
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? EntryViewController else {
             return
         }
         vc.title = "New Note"
         vc.navigationItem.largeTitleDisplayMode = .never
-        vc.completion = { noteTitle, note in
+        vc.completion = { noteTitle, noteText in
             self.navigationController?.popToRootViewController(animated: true)
-            self.models.append((title: noteTitle, note: note))
-            self.titleLabel.isHidden = true // titleLabel use these properties primarily to configure the text of the button.
+            self.models.append(SingleNote(noteTitle: noteTitle, noteText: noteText, noteTimeStamp: Date()))
+            self.titleLabel.isHidden = true
             self.tableView.isHidden = false
-            
             self.tableView.reloadData()//Reloads the rows and sections of the table view.
-
-
         }
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    //Table
-    
+    // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         models.count
     }
@@ -51,6 +47,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.textLabel?.text = models[indexPath.row].noteTitle
         cell.detailTextLabel?.text = models[indexPath.row].noteText
         return cell
+    }
+    
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let swipeDel = UIContextualAction(style: .normal, title: "Удалить") { (action, view, success) in print("Delete")
+        }
+        swipeDel.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+        let conf = UISwipeActionsConfiguration(actions: [swipeDel])
+        conf.performsFirstActionWithFullSwipe = false
+        return UISwipeActionsConfiguration(actions: [swipeDel])
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -65,7 +71,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.title = "Note"
         vc.noteTitle = model.noteTitle
-        vc.note = model.noteText
+        vc.noteText = model.noteText
         navigationController?.pushViewController(vc, animated: true)
     }
 
