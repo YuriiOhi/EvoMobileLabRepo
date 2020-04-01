@@ -27,12 +27,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         vc.title = "New Note"
         vc.navigationItem.largeTitleDisplayMode = .never
-        vc.completion = { noteTitle, noteText in
-            self.navigationController?.popToRootViewController(animated: true)
-            self.models.append(SingleNote(noteTitle: noteTitle, noteText: noteText, noteTimeStamp: Date()))
-            self.titleLabel.isHidden = true
-            self.tableView.isHidden = false
-            self.tableView.reloadData()//Reloads the rows and sections of the table view.
+        vc.completion = { [weak self] noteTitle, noteText in
+            self?.navigationController?.popToRootViewController(animated: true)
+            self?.models.append(SingleNote(noteTitle: noteTitle, noteText: noteText, noteTimeStamp: Date()))
+            self?.titleLabel.isHidden = true
+            self?.tableView.isHidden = false
+            self?.tableView.reloadData()//Reloads the rows and sections of the table view.
         }
         navigationController?.pushViewController(vc, animated: true)
     }
