@@ -13,6 +13,11 @@ class EntryViewController: UIViewController {
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var noteField: UITextView!
     
+    func configure(with model: SingleNote) {
+        titleField.text = model.title
+        noteField.text = model.text
+    }
+    
     public var completion: ((String, String) -> Void)?
     
     override func viewDidLoad() {

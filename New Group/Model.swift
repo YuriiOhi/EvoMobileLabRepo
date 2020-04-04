@@ -9,9 +9,8 @@
 import UIKit
 
 struct SingleNote {
-    private(set) var noteTitle: String
-    private(set) var noteText: String
-    private(set) var noteTimeStamp: Date
+    private(set) var title: String
+    private(set) var text: String
+    private(set) var timeStamp: Date
    // private(set) var uuidString: String
 }
-

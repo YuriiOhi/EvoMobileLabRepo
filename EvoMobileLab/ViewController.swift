@@ -20,16 +20,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         title = "Notes"
     }
-    //
+    
     @IBAction func didTapNewNote() {
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? EntryViewController else {
             return
         }
+        
         vc.title = "New Note"
         vc.navigationItem.largeTitleDisplayMode = .never
-        vc.completion = { [weak self] noteTitle, noteText in
+        vc.completion = { [weak self] noteTitle, noteText in // items in a capture list get the strong ref by default
             self?.navigationController?.popToRootViewController(animated: true)
-            self?.models.append(SingleNote(noteTitle: noteTitle, noteText: noteText, noteTimeStamp: Date()))
+            self?.models.append(SingleNote(title: noteTitle, text: noteText, timeStamp: Date()))
             self?.titleLabel.isHidden = true
             self?.tableView.isHidden = false
             self?.tableView.reloadData()//Reloads the rows and sections of the table view.
@@ -41,11 +42,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         models.count
     }
-
+    
+    func formattedDateString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        return dateFormatter.string(from: Date())
+    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = models[indexPath.row].noteTitle
-        cell.detailTextLabel?.text = models[indexPath.row].noteText
+        cell.textLabel?.text = models[indexPath.row].title
+        cell.detailTextLabel?.text = models[indexPath.row].text
+        cell.textLabel?.text = formattedDateString(date: models[indexPath.row].timeStamp)
         return cell
     }
     
@@ -70,9 +79,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.title = "Note"
-        vc.noteTitle = model.noteTitle
-        vc.noteText = model.noteText
+        vc.noteTitle = model.title
+        vc.noteText = model.text
         navigationController?.pushViewController(vc, animated: true)
     }
 
 }
+
