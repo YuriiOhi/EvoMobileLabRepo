@@ -8,8 +8,9 @@
 
 import UIKit
 // Saved Note VC
-class NoteViewController: UIViewController {
+class DisplayNoteViewController: UIViewController {
 
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var noteLabel: UITextView!
     
@@ -19,8 +20,6 @@ class NoteViewController: UIViewController {
         super.viewDidLoad()
         titleLabel.text = noteTitle
         noteLabel.text = noteText
-        
-        // Do any additional setup after loading the view.
     }
 
 }

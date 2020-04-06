@@ -8,15 +8,10 @@
 
 import UIKit
 // Notes Adding and Saving VC
-class EntryViewController: UIViewController {
+class CreateNoteViewController: UIViewController {
 
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var noteField: UITextView!
-    
-    func configure(with model: SingleNote) {
-        titleField.text = model.title
-        noteField.text = model.text
-    }
     
     public var completion: ((String, String) -> Void)?
     
@@ -26,10 +21,10 @@ class EntryViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
                                                             style: .done,
                                                             target: self,
-                                                            action: #selector(didTapSave))
+                                                            action: #selector(didTapNewNote))
     }
     
-    @objc func didTapSave() {
+    @objc func didTapNewNote() {
         if let text = titleField.text, !text.isEmpty, !noteField.text.isEmpty {
             completion?(text, noteField.text)
         }

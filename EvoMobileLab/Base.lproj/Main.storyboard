@@ -10,8 +10,8 @@
         <!--Notes-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="EvoMobileLab" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="BYZ-38-t0r" customClass="NoteListViewController" customModule="EvoMobileLab" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -25,29 +25,22 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="D2Q-a4-qeA" detailTextLabel="EWN-pU-h0G" rowHeight="85" style="IBUITableViewCellStyleSubtitle" id="ID5-St-KQw">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="85"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="2lS-Pk-2dC" detailTextLabel="nir-kv-BoP" rowHeight="95" style="IBUITableViewCellStyleSubtitle" id="sZn-GA-qg4">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="bottom" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ID5-St-KQw" id="FrX-xc-NKs">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="85"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sZn-GA-qg4" id="AXp-mU-sHM">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D2Q-a4-qeA">
-                                                    <rect key="frame" x="20" y="22" width="33.5" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2lS-Pk-2dC">
+                                                    <rect key="frame" x="20" y="27" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQ4-Oh-9ru">
-                                                    <rect key="frame" x="172" y="32" width="38" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EWN-pU-h0G">
-                                                    <rect key="frame" x="20" y="45.5" width="44" height="14.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nir-kv-BoP">
+                                                    <rect key="frame" x="20" y="50.5" width="44" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -73,7 +66,7 @@
                     <navigationItem key="navigationItem" title="Notes" id="sjf-Gm-sRi">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="VST-wA-o4G">
                             <connections>
-                                <action selector="didTapNewNote" destination="BYZ-38-t0r" id="hmo-fu-xmE"/>
+                                <action selector="didTapNewNote" destination="BYZ-38-t0r" id="yTk-KV-plh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -84,12 +77,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="843" y="126"/>
+            <point key="canvasLocation" x="842.02898550724649" y="125.89285714285714"/>
         </scene>
-        <!--Entry View Controller-->
+        <!--Create Note View Controller-->
         <scene sceneID="gpJ-k8-PbW">
             <objects>
-                <viewController storyboardIdentifier="new" id="Vwg-FB-LaZ" customClass="EntryViewController" customModule="EvoMobileLab" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="new" id="Vwg-FB-LaZ" customClass="CreateNoteViewController" customModule="EvoMobileLab" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sGY-kR-i1V">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,7 +116,7 @@
                         <viewLayoutGuide key="safeArea" id="FMZ-e6-bfF"/>
                     </view>
                     <connections>
-                        <outlet property="noteField" destination="EuC-50-vgm" id="bMk-py-xAG"/>
+                        <outlet property="noteField" destination="EuC-50-vgm" id="Ff8-gK-9jz"/>
                         <outlet property="titleField" destination="pTG-sZ-ryL" id="dtm-JY-i80"/>
                     </connections>
                 </viewController>
@@ -131,10 +124,10 @@
             </objects>
             <point key="canvasLocation" x="1530.4347826086957" y="126.5625"/>
         </scene>
-        <!--Note View Controller-->
+        <!--Display Note View Controller-->
         <scene sceneID="WI7-Z4-ByX">
             <objects>
-                <viewController storyboardIdentifier="note" id="SU1-Jy-V5i" customClass="NoteViewController" customModule="EvoMobileLab" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="note" id="SU1-Jy-V5i" customClass="DisplayNoteViewController" customModule="EvoMobileLab" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a25-Ps-ZZy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -169,8 +162,8 @@
                         <viewLayoutGuide key="safeArea" id="fLx-3l-xEw"/>
                     </view>
                     <connections>
-                        <outlet property="noteLabel" destination="r1Y-k7-IM1" id="RKR-5a-BOf"/>
-                        <outlet property="titleLabel" destination="NUX-3h-kbz" id="vcA-88-KQc"/>
+                        <outlet property="noteLabel" destination="r1Y-k7-IM1" id="DTL-zJ-5Zy"/>
+                        <outlet property="titleLabel" destination="NUX-3h-kbz" id="8Fu-Ke-XRr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtH-Yy-PKA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

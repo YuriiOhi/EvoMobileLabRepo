@@ -7,109 +7,81 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A"
+            uuid = "2C8DD31C-85A4-4310-9BED-FE28B29D1BA0"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvoMobileLab/NoteViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "12"
-            endingLineNumber = "12"
-            landmarkName = "NoteViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - a233d41d4dc76ab0"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EvoMobileLab.NoteViewController.titleLabel.getter : Swift.Optional&lt;__C.UILabel&gt;"
-                  moduleName = "EvoMobileLab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "88">
-               </Location>
-               <Location
-                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - d4cb29270bf2cea4"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EvoMobileLab.NoteViewController.titleLabel.setter : Swift.Optional&lt;__C.UILabel&gt;"
-                  moduleName = "EvoMobileLab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - a31aae9e6074db5"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EvoMobileLab.NoteViewController.titleLabel.modify : Swift.Optional&lt;__C.UILabel&gt;"
-                  moduleName = "EvoMobileLab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "67">
-               </Location>
-               <Location
-                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - 8248e2ac559eb795"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EvoMobileLab.NoteViewController.titleLabel.modify : Swift.Optional&lt;__C.UILabel&gt; with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "EvoMobileLab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "76">
-               </Location>
-               <Location
-                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - 9cb5c6a4ffe34880"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EvoMobileLab.NoteViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; EvoMobileLab.NoteViewController"
-                  moduleName = "EvoMobileLab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "182">
-               </Location>
-               <Location
-                  uuid = "2075B7D7-B84D-4108-B9CD-E36F454A250A - 4c3a7057081819bb"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "EvoMobileLab.NoteViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;EvoMobileLab.NoteViewController&gt;"
-                  moduleName = "EvoMobileLab"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yuriimac/MyApps/EvoMobileLab/EvoMobileLab/NoteViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "119">
-               </Location>
-            </Locations>
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "236E4322-2DF0-4EAB-9919-AD5987BBD4C6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EvoMobileLab/NoteViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9266C54D-07F0-41B3-8813-CDD7D13393DD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EvoMobileLab/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "didTapNewNote()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "381D66E6-53B4-4520-852D-B1DD5B9800A4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EvoMobileLab/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "didTapNewNote()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "895A7E5E-A639-4CBF-A4F1-E4D5D9CD1C96"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EvoMobileLab/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

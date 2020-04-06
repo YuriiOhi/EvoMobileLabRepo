@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NoteListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -20,23 +20,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         title = "Notes"
     }
-    
-    @IBAction func didTapNewNote() {
-        guard let vc = storyboard?.instantiateViewController(identifier: "new") as? EntryViewController else {
-            return
-        }
         
-        vc.title = "New Note"
-        vc.navigationItem.largeTitleDisplayMode = .never
-        vc.completion = { [weak self] noteTitle, noteText in // items in a capture list get the strong ref by default
-            self?.navigationController?.popToRootViewController(animated: true)
-            self?.models.append(SingleNote(title: noteTitle, text: noteText, timeStamp: Date()))
-            self?.titleLabel.isHidden = true
-            self?.tableView.isHidden = false
-            self?.tableView.reloadData()//Reloads the rows and sections of the table view.
+    @IBAction func didTapNewNote() {
+        guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
+                return
+            }
+            
+            vc.title = "New Note"
+            vc.navigationItem.largeTitleDisplayMode = .never
+            vc.completion = { [weak self] noteTitle, noteText in // items in a capture list get the strong ref by default
+                self?.navigationController?.popToRootViewController(animated: true)
+                self?.models.append(SingleNote(title: noteTitle, text: noteText, timeStamp: Date()))
+                self?.titleLabel.isHidden = true
+                self?.tableView.isHidden = false
+                self?.tableView.reloadData()//Reloads the rows and sections of the table view.
+            }
+            navigationController?.pushViewController(vc, animated: true)
         }
-        navigationController?.pushViewController(vc, animated: true)
-    }
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,12 +49,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return dateFormatter.string(from: Date())
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = models[indexPath.row].title
+        cell.textLabel?.text = models[indexPath.row].title //+ "\n" + formattedDateString(date: models[indexPath.row].timeStamp)
         cell.detailTextLabel?.text = models[indexPath.row].text
-        cell.textLabel?.text = formattedDateString(date: models[indexPath.row].timeStamp)
+       //cell.textLabel?.text = formattedDateString(date: models[indexPath.row].timeStamp) // +
         return cell
     }
     
@@ -74,7 +73,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let model = models[indexPath.row]
         
         // Show note controller
-        guard let vc = storyboard?.instantiateViewController(identifier: "note") as? NoteViewController else {
+        guard let vc = storyboard?.instantiateViewController(identifier: "note") as? DisplayNoteViewController else {
             return
         }
         vc.navigationItem.largeTitleDisplayMode = .never

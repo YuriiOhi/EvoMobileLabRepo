@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		52703383241F609700694C46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52703382241F609700694C46 /* AppDelegate.swift */; };
 		52703385241F609700694C46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52703384241F609700694C46 /* SceneDelegate.swift */; };
-		52703387241F609700694C46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52703386241F609700694C46 /* ViewController.swift */; };
+		52703387241F609700694C46 /* NoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52703386241F609700694C46 /* NoteListViewController.swift */; };
 		5270338A241F609700694C46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52703388241F609700694C46 /* Main.storyboard */; };
 		5270338D241F609700694C46 /* EvoMobileLab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5270338B241F609700694C46 /* EvoMobileLab.xcdatamodeld */; };
 		5270338F241F609800694C46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5270338E241F609800694C46 /* Assets.xcassets */; };
 		52703392241F609800694C46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52703390241F609800694C46 /* LaunchScreen.storyboard */; };
-		527033C12421FC2A00694C46 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527033C02421FC2A00694C46 /* NoteViewController.swift */; };
+		527033C12421FC2A00694C46 /* DisplayNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527033C02421FC2A00694C46 /* DisplayNoteViewController.swift */; };
 		527033C32421FC6B00694C46 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527033C22421FC6B00694C46 /* EntryViewController.swift */; };
 		5275E18F242C8C5C003A457E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275E18E242C8C5C003A457E /* Model.swift */; };
 /* End PBXBuildFile section */
@@ -23,13 +23,13 @@
 		5270337F241F609700694C46 /* EvoMobileLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoMobileLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52703382241F609700694C46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52703384241F609700694C46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		52703386241F609700694C46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		52703386241F609700694C46 /* NoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewController.swift; sourceTree = "<group>"; };
 		52703389241F609700694C46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5270338C241F609700694C46 /* EvoMobileLab.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EvoMobileLab.xcdatamodel; sourceTree = "<group>"; };
 		5270338E241F609800694C46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52703391241F609800694C46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52703393241F609800694C46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		527033C02421FC2A00694C46 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		527033C02421FC2A00694C46 /* DisplayNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayNoteViewController.swift; sourceTree = "<group>"; };
 		527033C22421FC6B00694C46 /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		5275E18E242C8C5C003A457E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,10 +67,10 @@
 			children = (
 				52703382241F609700694C46 /* AppDelegate.swift */,
 				52703384241F609700694C46 /* SceneDelegate.swift */,
-				52703386241F609700694C46 /* ViewController.swift */,
+				52703386241F609700694C46 /* NoteListViewController.swift */,
 				52703388241F609700694C46 /* Main.storyboard */,
 				527033C22421FC6B00694C46 /* EntryViewController.swift */,
-				527033C02421FC2A00694C46 /* NoteViewController.swift */,
+				527033C02421FC2A00694C46 /* DisplayNoteViewController.swift */,
 				5270338E241F609800694C46 /* Assets.xcassets */,
 				52703390241F609800694C46 /* LaunchScreen.storyboard */,
 				52703393241F609800694C46 /* Info.plist */,
@@ -158,10 +158,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52703387241F609700694C46 /* ViewController.swift in Sources */,
+				52703387241F609700694C46 /* NoteListViewController.swift in Sources */,
 				52703383241F609700694C46 /* AppDelegate.swift in Sources */,
 				5270338D241F609700694C46 /* EvoMobileLab.xcdatamodeld in Sources */,
-				527033C12421FC2A00694C46 /* NoteViewController.swift in Sources */,
+				527033C12421FC2A00694C46 /* DisplayNoteViewController.swift in Sources */,
 				5275E18F242C8C5C003A457E /* Model.swift in Sources */,
 				52703385241F609700694C46 /* SceneDelegate.swift in Sources */,
 				527033C32421FC6B00694C46 /* EntryViewController.swift in Sources */,
