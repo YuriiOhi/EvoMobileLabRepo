@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NoteListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -50,10 +50,12 @@ class NoteListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = models[indexPath.row].title //+ "\n" + formattedDateString(date: models[indexPath.row].timeStamp)
-        cell.detailTextLabel?.text = models[indexPath.row].text
-       //cell.textLabel?.text = formattedDateString(date: models[indexPath.row].timeStamp) // +
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NoteCell
+    
+        cell.dateLabel?.text = formattedDateString(date: models[indexPath.row].timeStamp)
+        cell.titleLabel?.text = models[indexPath.row].title
+        cell.noteLabel?.text = models[indexPath.row].text
+        
         return cell
     }
     
