@@ -12,5 +12,6 @@ struct SingleNote {
     private(set) var title: String
     private(set) var text: String
     private(set) var timeStamp: Date
+    private(set) var dateStamp: Date
    // private(set) var uuidString: String
 }
