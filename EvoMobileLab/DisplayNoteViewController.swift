@@ -9,7 +9,7 @@
 import UIKit
 // Saved Note VC
 class DisplayNoteViewController: UIViewController {
-
+    
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var noteLabel: UITextView!
@@ -20,6 +20,17 @@ class DisplayNoteViewController: UIViewController {
         super.viewDidLoad()
         titleLabel.text = noteTitle
         noteLabel.text = noteText
+        
+        let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(didTapEditNote))
+        let shareButton = UIBarButtonItem(title: "Share", style: .done, target: self, action: #selector(didTapShareNote))
+        navigationItem.rightBarButtonItems = [editButton, shareButton]
     }
-
+    
+    @objc func didTapEditNote() {
+        print("edit")
+    }
+    @objc func didTapShareNote() {
+        print("share")
+    }
 }
+

@@ -9,12 +9,12 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIApplicationDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    var isExsisting = false
     var models: [NSManagedObject] = []
     //loadView 1st
     override func viewDidLoad() {
@@ -22,23 +22,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         title = "Notes"
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-    
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SingleNote")
-        
-        do {
-            models = try managedContext.fetch(fetchRequest)
-            tableView.reloadData()
-            tableView.isHidden = false
-
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        initialLoad()
     }
     
     @IBAction func didTapNewNote() {
@@ -69,6 +53,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     // MARK: - UITableViewDataSource
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         models.count
     }
@@ -87,15 +74,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        //if editingStyle == UITableViewCell.EditingStyle.delete {
+            //let entity = NSEntityDescription.entity(forEntityName: "SingleNote", in: self.context)!
+           // let note = NSManagedObject(entity: entity, insertInto: self.context)
+            guard let noteToRemove = models[indexPath.row] as? SingleNoteMO, editingStyle == .delete else {
+                return
+            }
+            context.delete(noteToRemove)
+            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+            //self.tableView.deleteRows(at: [indexPath], with: .automatic)
+
+            do {
+                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SingleNote")
+                models = try context.fetch(fetchRequest)
+                try context.save()
+                tableView.reloadData()
+                tableView.isHidden = false
+                
+                } catch let error as NSError {
+                    print("Could not fetch. \(error), \(error.userInfo)")
+            }
+        //} else if editingStyle == .insert {
+        tableView.reloadData()
+    }
+    
     // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    /*func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let swipeDel = UIContextualAction(style: .normal, title: "Удалить") { (action, view, success) in print("Delete")
         }
-        swipeDel.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+        swipeDel.backgroundColor = .red
         let conf = UISwipeActionsConfiguration(actions: [swipeDel])
         conf.performsFirstActionWithFullSwipe = false
         return UISwipeActionsConfiguration(actions: [swipeDel])
-    }
+    }*/
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -128,5 +141,18 @@ extension ViewController {
         dateFormatter.dateFormat = "hh:mm"
         return dateFormatter.string(from: Date(timeIntervalSince1970: timeSince1970))
     }
+    
+    func initialLoad() {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SingleNote")
+        do {
+            models = try context.fetch(fetchRequest)
+            tableView.reloadData()
+            tableView.isHidden = false
+            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
 }
+
 
