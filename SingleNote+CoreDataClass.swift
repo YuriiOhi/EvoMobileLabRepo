@@ -11,6 +11,6 @@ import Foundation
 import CoreData
 
 
-public class SingleNoteMO: NSManagedObject {
+class SingleNoteMO: NSManagedObject {
 
 }

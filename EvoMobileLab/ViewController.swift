@@ -13,17 +13,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     var models: [NSManagedObject] = []
-    
+    //loadView 1st
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         title = "Notes"
-    }
         
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+    
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SingleNote")
+        
+        do {
+            models = try managedContext.fetch(fetchRequest)
+            tableView.reloadData()
+            tableView.isHidden = false
+
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+    
     @IBAction func didTapNewNote() {
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
@@ -31,23 +48,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         vc.title = "New Note"
         vc.navigationItem.largeTitleDisplayMode = .never
-        vc.completion = { [weak self] noteTitle, noteText in // items in a capture list get the strong ref by default
+        vc.completion = { [weak self] noteTitle, noteText, noteDate in
             let entity = NSEntityDescription.entity(forEntityName: "SingleNote", in: self!.context)!
             let note = NSManagedObject(entity: entity, insertInto: self!.context)
             note.setValue(noteTitle, forKeyPath: "title")
             note.setValue(noteText, forKeyPath: "text")
-
+            note.setValue(noteDate, forKey: "creationTimeStamp")
             do {
                 self!.models.append(note)
                 try self!.context.save()
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
             }
-            
             self?.navigationController?.popToRootViewController(animated: true)
             self?.titleLabel.isHidden = true
             self?.tableView.isHidden = false
-            self?.tableView.reloadData()//Reloads the rows and sections of the table view.
+            self?.tableView.reloadData()
         }
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -61,14 +77,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let model = models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NoteCell
         if let date = model.value(forKeyPath: "creationTimeStamp") as? Date {
-            cell.timeLabel?.text = formattedDateString(date: date)
-        } else {
-            print("Corrupted timeLable")
-        }
-        if let date = model.value(forKeyPath: "creationTimeStamp") as? Date {
+            cell.timeLabel?.text = formattedTimeString(date: date)
             cell.dateLabel?.text = formattedDateString(date: date)
         } else {
-            print("Corrupted dateLabel")
+            print("Corrupted dateLabel again")
         }
         cell.titleLabel?.text = model.value(forKeyPath: "title") as? String
         cell.noteLabel?.text = model.value(forKeyPath: "text") as? String
@@ -88,7 +100,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = models[indexPath.row]
-        // Show note controller
         guard let vc = storyboard?.instantiateViewController(identifier: "note") as? DisplayNoteViewController else {
             return
         }
@@ -98,7 +109,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc.noteText = model.value(forKeyPath: "text") as! String
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    
 }
 
 extension ViewController {

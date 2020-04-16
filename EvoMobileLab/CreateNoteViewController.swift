@@ -12,7 +12,7 @@ class CreateNoteViewController: UIViewController {
 
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var noteField: UITextView!
-    public var completion: ((String, String) -> Void)?
+    public var completion: ((String, String, Date) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class CreateNoteViewController: UIViewController {
     
     @objc func didTapNewNote() {
         if let text = titleField.text, !text.isEmpty, !noteField.text.isEmpty {
-            completion?(text, noteField.text)
+            completion?(text, noteField.text, Date())
         }
     }
     /*
