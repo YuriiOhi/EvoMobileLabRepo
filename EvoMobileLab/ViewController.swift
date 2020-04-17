@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var titleLabel: UILabel!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var isExsisting = false
-    var models: [NSManagedObject] = []
+    var models: [SingleNoteMO] = []
     //loadView 1st
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.completion = { [weak self] noteTitle, noteText, noteDate in
             let entity = NSEntityDescription.entity(forEntityName: "SingleNote", in: self!.context)!
-            let note = NSManagedObject(entity: entity, insertInto: self!.context)
+            let note = SingleNoteMO(entity: entity, insertInto: self!.context)
             note.setValue(noteTitle, forKeyPath: "title")
             note.setValue(noteText, forKeyPath: "text")
             note.setValue(noteDate, forKey: "creationTimeStamp")
@@ -76,39 +76,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        //if editingStyle == UITableViewCell.EditingStyle.delete {
-            //let entity = NSEntityDescription.entity(forEntityName: "SingleNote", in: self.context)!
-           // let note = NSManagedObject(entity: entity, insertInto: self.context)
-            guard let noteToRemove = models[indexPath.row] as? SingleNoteMO, editingStyle == .delete else {
-                return
-            }
-            context.delete(noteToRemove)
-            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-            //self.tableView.deleteRows(at: [indexPath], with: .automatic)
-
+        if editingStyle == .delete {
+            let noteToDelete = models[indexPath.row] //pull out the NSManObj object that I selected to delete
+            context.delete(noteToDelete) //removes it from the managed object context,
+            (UIApplication.shared.delegate as! AppDelegate).saveContext() // save changes in ManObjContext
+            //tableView.deleteRows(at: [indexPath], with: .fade) если раскоментить аппа будет крашится в том числе если добавить begin/endUpdates()
             do {
-                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SingleNote")
+                let fetchRequest = NSFetchRequest<SingleNoteMO>(entityName: "SingleNote")
                 models = try context.fetch(fetchRequest)
-                try context.save()
-                tableView.reloadData()
-                tableView.isHidden = false
-                
-                } catch let error as NSError {
-                    print("Could not fetch. \(error), \(error.userInfo)")
+            } catch {
+                print("Fetching Failed")
             }
-        //} else if editingStyle == .insert {
+        }
         tableView.reloadData()
     }
     
     // MARK: - UITableViewDelegate
-    /*func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let swipeDel = UIContextualAction(style: .normal, title: "Удалить") { (action, view, success) in print("Delete")
-        }
-        swipeDel.backgroundColor = .red
-        let conf = UISwipeActionsConfiguration(actions: [swipeDel])
-        conf.performsFirstActionWithFullSwipe = false
-        return UISwipeActionsConfiguration(actions: [swipeDel])
-    }*/
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -143,7 +126,7 @@ extension ViewController {
     }
     
     func initialLoad() {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SingleNote")
+        let fetchRequest = NSFetchRequest<SingleNoteMO>(entityName: "SingleNote")
         do {
             models = try context.fetch(fetchRequest)
             tableView.reloadData()
