@@ -173,43 +173,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUX-3h-kbz">
-                                <rect key="frame" x="10" y="54" width="394" height="60"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="dd" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xYz-Xi-Ndp">
+                                <rect key="frame" x="10" y="116" width="394" height="736"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eGT-LI-gVA">
+                                <rect key="frame" x="10" y="54" width="394" height="52"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="cGv-6d-P9H"/>
+                                    <constraint firstAttribute="height" constant="52" id="4Yl-ra-fEn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="r1Y-k7-IM1">
-                                <rect key="frame" x="10" y="124" width="394" height="728"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="NUX-3h-kbz" firstAttribute="top" secondItem="fLx-3l-xEw" secondAttribute="top" constant="10" id="16R-Tu-4gi"/>
-                            <constraint firstItem="NUX-3h-kbz" firstAttribute="leading" secondItem="fLx-3l-xEw" secondAttribute="leading" constant="10" id="BS6-6N-8qN"/>
-                            <constraint firstItem="fLx-3l-xEw" firstAttribute="trailing" secondItem="NUX-3h-kbz" secondAttribute="trailing" constant="10" id="Qt9-Yr-qHQ"/>
-                            <constraint firstItem="fLx-3l-xEw" firstAttribute="bottom" secondItem="r1Y-k7-IM1" secondAttribute="bottom" constant="10" id="T6D-dg-d6C"/>
-                            <constraint firstItem="fLx-3l-xEw" firstAttribute="trailing" secondItem="r1Y-k7-IM1" secondAttribute="trailing" constant="10" id="URB-vp-zpf"/>
-                            <constraint firstItem="r1Y-k7-IM1" firstAttribute="top" secondItem="NUX-3h-kbz" secondAttribute="bottom" constant="10" id="f2U-hg-b5T"/>
-                            <constraint firstItem="r1Y-k7-IM1" firstAttribute="leading" secondItem="fLx-3l-xEw" secondAttribute="leading" constant="10" id="gyZ-9Q-r8R"/>
+                            <constraint firstItem="xYz-Xi-Ndp" firstAttribute="top" secondItem="eGT-LI-gVA" secondAttribute="bottom" constant="10" id="1MC-R3-qt8"/>
+                            <constraint firstItem="fLx-3l-xEw" firstAttribute="trailing" secondItem="eGT-LI-gVA" secondAttribute="trailing" constant="10" id="3lG-ve-YKO"/>
+                            <constraint firstItem="eGT-LI-gVA" firstAttribute="leading" secondItem="fLx-3l-xEw" secondAttribute="leading" constant="10" id="G4P-5t-mRu"/>
+                            <constraint firstItem="xYz-Xi-Ndp" firstAttribute="leading" secondItem="fLx-3l-xEw" secondAttribute="leading" constant="10" id="Poa-kr-i8A"/>
+                            <constraint firstItem="fLx-3l-xEw" firstAttribute="trailing" secondItem="xYz-Xi-Ndp" secondAttribute="trailing" constant="10" id="at6-dl-kTH"/>
+                            <constraint firstItem="eGT-LI-gVA" firstAttribute="top" secondItem="fLx-3l-xEw" secondAttribute="top" constant="10" id="e14-j6-3nr"/>
+                            <constraint firstItem="fLx-3l-xEw" firstAttribute="bottom" secondItem="xYz-Xi-Ndp" secondAttribute="bottom" constant="10" id="iTh-Ix-8WK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fLx-3l-xEw"/>
                     </view>
                     <connections>
-                        <outlet property="noteLabel" destination="r1Y-k7-IM1" id="DTL-zJ-5Zy"/>
-                        <outlet property="titleLabel" destination="NUX-3h-kbz" id="8Fu-Ke-XRr"/>
+                        <outlet property="noteLabel" destination="xYz-Xi-Ndp" id="Mqp-E6-rNS"/>
+                        <outlet property="titleLabel" destination="eGT-LI-gVA" id="vKy-nE-X4W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtH-Yy-PKA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2195" y="123"/>
+            <point key="canvasLocation" x="2194.202898550725" y="122.54464285714285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2rc-5c-q1G">

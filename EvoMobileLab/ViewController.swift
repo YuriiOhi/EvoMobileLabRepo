@@ -13,9 +13,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var isExsisting = false
+    let context = AppDelegate.shared.persistentContainer.viewContext
     var models: [SingleNoteMO] = []
+    //var state: States
     //loadView 1st
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
         }
-        
         vc.title = "New Note"
         vc.navigationItem.largeTitleDisplayMode = .never
         vc.completion = { [weak self] noteTitle, noteText, noteDate in
@@ -48,14 +47,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self?.titleLabel.isHidden = true
             self?.tableView.isHidden = false
             self?.tableView.reloadData()
+            //self?.state = .create
         }
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    // MARK: - UITableViewDataSource
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+    
+    // MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let model = models[indexPath.row]
+        guard let vc = storyboard?.instantiateViewController(identifier: "note") as? DisplayNoteViewController else {
+            return
+        }
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.title = "Note"
+        vc.noteTitle = model.value(forKeyPath: "title") as! String
+        vc.noteText = model.value(forKeyPath: "text") as! String
+        //self.state = .display
+        navigationController?.pushViewController(vc, animated: true)
     }
+    
+    
+    // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         models.count
     }
@@ -74,36 +89,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let noteToDelete = models[indexPath.row] //pull out the NSManObj object that I selected to delete
-            context.delete(noteToDelete) //removes it from the managed object context,
-            (UIApplication.shared.delegate as! AppDelegate).saveContext() // save changes in ManObjContext
-            //tableView.deleteRows(at: [indexPath], with: .fade) если раскоментить аппа будет крашится в том числе если добавить begin/endUpdates()
-            do {
-                let fetchRequest = NSFetchRequest<SingleNoteMO>(entityName: "SingleNote")
-                models = try context.fetch(fetchRequest)
-            } catch {
-                print("Fetching Failed")
-            }
+            removeRow(at: indexPath)
         }
-        tableView.reloadData()
-    }
-    
-    // MARK: - UITableViewDelegate
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let model = models[indexPath.row]
-        guard let vc = storyboard?.instantiateViewController(identifier: "note") as? DisplayNoteViewController else {
-            return
-        }
-        vc.navigationItem.largeTitleDisplayMode = .never
-        vc.title = "Note"
-        vc.noteTitle = model.value(forKeyPath: "title") as! String
-        vc.noteText = model.value(forKeyPath: "text") as! String
-        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -136,6 +129,20 @@ extension ViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
+    
+    private func removeRow(at indexPath: IndexPath) {
+        let noteToDelete = models[indexPath.row]
+        models.remove(at: indexPath.row )//pull out the NSManObj object that I selected to delete
+        context.delete(noteToDelete) //removes it from the managed object context,
+        AppDelegate.shared.saveContext() // save changes in ManObjContext
+        tableView.deleteRows(at: [indexPath], with: .fade) //если раскоментить аппа будет крашится в том числе если добавить begin/endUpdates(
+    }
+    
+    enum States {
+        case create, display, edit
+    }
+    
 }
+
 
 
