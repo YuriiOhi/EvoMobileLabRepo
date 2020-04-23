@@ -5,15 +5,19 @@
 //  Created by Yurii on 2020/3/18.
 //  Copyright © 2020 Yurii. All rights reserved.
 //
-
 import UIKit
+
+enum State {
+    case create, display, edit
+}
 // Notes Adding and Saving VC
+
 class CreateNoteViewController: UIViewController {
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var noteField: UITextView!
     public var completion: ((String, String, Date) -> Void)?
-    
+    var state: State = .create
     override func viewDidLoad() {
         super.viewDidLoad()
         titleField.becomeFirstResponder()
@@ -37,5 +41,5 @@ class CreateNoteViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
+
 }

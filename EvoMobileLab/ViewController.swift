@@ -15,7 +15,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var titleLabel: UILabel!
     let context = AppDelegate.shared.persistentContainer.viewContext
     var models: [SingleNoteMO] = []
-    //var state: States
     //loadView 1st
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func didTapNewNote() {
+        
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
         }
@@ -47,7 +47,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self?.titleLabel.isHidden = true
             self?.tableView.isHidden = false
             self?.tableView.reloadData()
-            //self?.state = .create
         }
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -136,10 +135,6 @@ extension ViewController {
         context.delete(noteToDelete) //removes it from the managed object context,
         AppDelegate.shared.saveContext() // save changes in ManObjContext
         tableView.deleteRows(at: [indexPath], with: .fade) //если раскоментить аппа будет крашится в том числе если добавить begin/endUpdates(
-    }
-    
-    enum States {
-        case create, display, edit
     }
     
 }

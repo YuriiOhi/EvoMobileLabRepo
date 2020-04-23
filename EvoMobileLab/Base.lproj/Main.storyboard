@@ -173,7 +173,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="dd" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xYz-Xi-Ndp">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xYz-Xi-Ndp">
                                 <rect key="frame" x="10" y="116" width="394" height="736"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -200,8 +200,8 @@
                         <viewLayoutGuide key="safeArea" id="fLx-3l-xEw"/>
                     </view>
                     <connections>
-                        <outlet property="noteLabel" destination="xYz-Xi-Ndp" id="Mqp-E6-rNS"/>
-                        <outlet property="titleLabel" destination="eGT-LI-gVA" id="vKy-nE-X4W"/>
+                        <outlet property="noteField" destination="xYz-Xi-Ndp" id="kH4-9C-CSa"/>
+                        <outlet property="titleField" destination="eGT-LI-gVA" id="vKy-nE-X4W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtH-Yy-PKA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

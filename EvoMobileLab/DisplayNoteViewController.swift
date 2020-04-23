@@ -11,42 +11,26 @@ import UIKit
 class DisplayNoteViewController: UIViewController {
     
     
-    @IBOutlet weak var titleLabel: UITextField!
-    @IBOutlet weak var noteLabel: UITextField!
+    @IBOutlet weak var titleField: UITextField!
+    @IBOutlet weak var noteField: UITextField!
     
     public var noteTitle: String = ""
     public var noteText: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleField.text = noteTitle
+        noteField.text = noteText
         
-        titleLabel.text = noteTitle
-        noteLabel.text = noteText
+        noteField.delegate = self
+        titleField.delegate = self
         
-        noteLabel.becomeFirstResponder()
-        noteLabel.delegate = self
-        titleLabel.delegate = self
-        titleLabel.borderStyle = UITextField.BorderStyle.none
-        noteLabel.borderStyle = UITextField.BorderStyle.none
-        noteLabel.textAlignment = .left
-        noteLabel.contentVerticalAlignment = .top
+        let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(showEditing))
+        self.navigationItem.rightBarButtonItem = rightButton
         
-        let editButton = UIBarButtonItem(title: "Edit",
-                                         style: .done,
-                                         target: self,
-                                         action: #selector(didTapEditNote))
-        let shareButton = UIBarButtonItem(title: "Share",
-                                          style: .done,
-                                          target: self,
-                                          action: #selector(didTapShareNote))
-        
-        navigationItem.rightBarButtonItems = [editButton, shareButton]
-    }
-    
-    @objc func didTapEditNote() {
-       
-    }
-    @objc func didTapShareNote() {
-        print("share")
+        titleField.borderStyle = UITextField.BorderStyle.none
+        noteField.borderStyle = UITextField.BorderStyle.none
+        noteField.textAlignment = .left
+        noteField.contentVerticalAlignment = .top
     }
 }
 
@@ -55,5 +39,28 @@ extension DisplayNoteViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    //функция которая позволяет редактирование текстФилда
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if isEditing == false {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    //Изменение "Edit" на "Done"
+    @objc func showEditing(sender: UIBarButtonItem) {
+        if(isEditing == false) {
+            isEditing = true
+            navigationItem.rightBarButtonItem?.title = "Done"
+        } else {
+            isEditing = false
+            navigationItem.rightBarButtonItem?.title = "Edit"
+        }
+    }
+    
+    func saveChanges() {
+        
+    }
 }
-
