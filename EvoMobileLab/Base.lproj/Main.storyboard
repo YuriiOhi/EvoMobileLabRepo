@@ -135,29 +135,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EuC-50-vgm">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uMI-js-KVj">
                                 <rect key="frame" x="10" y="116" width="394" height="736"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="FMZ-e6-bfF" firstAttribute="trailing" secondItem="uMI-js-KVj" secondAttribute="trailing" constant="10" id="DgY-Qq-LKo"/>
                             <constraint firstItem="FMZ-e6-bfF" firstAttribute="trailing" secondItem="pTG-sZ-ryL" secondAttribute="trailing" constant="10" id="HLe-dO-HJ0"/>
-                            <constraint firstItem="FMZ-e6-bfF" firstAttribute="bottom" secondItem="EuC-50-vgm" secondAttribute="bottom" constant="10" id="PFH-o3-32N"/>
-                            <constraint firstItem="EuC-50-vgm" firstAttribute="leading" secondItem="FMZ-e6-bfF" secondAttribute="leading" constant="10" id="TDX-au-izn"/>
-                            <constraint firstItem="EuC-50-vgm" firstAttribute="top" secondItem="pTG-sZ-ryL" secondAttribute="bottom" constant="10" id="ZJA-kG-vdL"/>
-                            <constraint firstItem="FMZ-e6-bfF" firstAttribute="trailing" secondItem="EuC-50-vgm" secondAttribute="trailing" constant="10" id="ZNm-kK-7dU"/>
+                            <constraint firstItem="FMZ-e6-bfF" firstAttribute="bottom" secondItem="uMI-js-KVj" secondAttribute="bottom" constant="10" id="RAh-Gh-3Ph"/>
                             <constraint firstItem="pTG-sZ-ryL" firstAttribute="top" secondItem="FMZ-e6-bfF" secondAttribute="top" constant="10" id="ezE-wh-w3W"/>
+                            <constraint firstItem="uMI-js-KVj" firstAttribute="leading" secondItem="FMZ-e6-bfF" secondAttribute="leading" constant="10" id="oed-O7-1AF"/>
+                            <constraint firstItem="uMI-js-KVj" firstAttribute="top" secondItem="pTG-sZ-ryL" secondAttribute="bottom" constant="10" id="uG9-5D-sgR"/>
                             <constraint firstItem="pTG-sZ-ryL" firstAttribute="leading" secondItem="FMZ-e6-bfF" secondAttribute="leading" constant="10" id="uOp-5Z-SmU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FMZ-e6-bfF"/>
                     </view>
                     <navigationItem key="navigationItem" id="LNR-d9-EjX"/>
                     <connections>
-                        <outlet property="noteField" destination="EuC-50-vgm" id="Ff8-gK-9jz"/>
+                        <outlet property="noteField" destination="uMI-js-KVj" id="qHq-vv-KKB"/>
                         <outlet property="titleField" destination="pTG-sZ-ryL" id="dtm-JY-i80"/>
                     </connections>
                 </viewController>

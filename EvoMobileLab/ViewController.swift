@@ -29,8 +29,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
         }
-        vc.title = "New Note"
-        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.noteDelegate = self
+
         vc.completion = { [weak self] noteTitle, noteText, noteDate in
             let entity = NSEntityDescription.entity(forEntityName: "SingleNote", in: self!.context)!
             let note = SingleNoteMO(entity: entity, insertInto: self!.context)
@@ -137,6 +137,10 @@ extension ViewController {
         tableView.deleteRows(at: [indexPath], with: .fade) //если раскоментить аппа будет крашится в том числе если добавить begin/endUpdates(
     }
     
+}
+
+extension ViewController: NoteDelegate {
+    func createNote(title: String, text: String, creationStamp: Date) {}
 }
 
 
