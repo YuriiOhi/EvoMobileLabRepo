@@ -35,10 +35,7 @@ class CreateNoteViewController: UIViewController {
     }
     
     func updateUIWithState(state: State) {
-        guard currentState != state else {
-            return
-        }
-        currentState = state
+        
         switch state {
         case .create:
             prepareForCreate()
