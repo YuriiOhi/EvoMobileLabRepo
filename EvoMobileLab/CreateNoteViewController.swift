@@ -12,14 +12,17 @@ enum State {
 }
 // Notes Adding and Saving VC
 protocol NoteDelegate: AnyObject {
-    func createNote(title: String, text: String, creationStamp: Date)
+    func createNote(title: String, text: String, creationStamp: Date, uuidString: UUID)
+    func displayNote(title: String, text: String)
 }
 class CreateNoteViewController: UIViewController {
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var noteField: UITextField!
-    public var completion: ((String, String, Date) -> Void)?
     
+    public var noteTitle: String = ""
+    public var noteText: String = ""
+        
     weak var noteDelegate: NoteDelegate?
     
     var currentState: State = .create
@@ -29,8 +32,8 @@ class CreateNoteViewController: UIViewController {
     }
     
     @objc func didTapNewNote() {
-        if let text = titleField.text, !text.isEmpty, !noteField.text!.isEmpty {
-            completion?(text, noteField.text!, Date())
+        if let title = titleField.text, !title.isEmpty, let text = noteField.text, !text.isEmpty {
+            noteDelegate!.createNote(title: title, text: text, creationStamp: Date(), uuidString: UUID())
         }
     }
     
@@ -58,10 +61,61 @@ class CreateNoteViewController: UIViewController {
     }
     
     func prepareForDisplay() {
+        navigationItem.largeTitleDisplayMode = .never
+        title = "Note"
+        noteField.becomeFirstResponder()
+        titleField.text = noteTitle
+        noteField.text = noteText
+     
+        titleField.delegate = self
+        noteField.delegate = self
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
+                                                            style: UIBarButtonItem.Style.plain,
+                                                            target: self,
+                                                            action: #selector(showEditing))
+        
+        titleField.borderStyle = UITextField.BorderStyle.none
+        noteField.borderStyle = UITextField.BorderStyle.none
+        
+        titleField.textAlignment = .left
+        noteField.textAlignment = .left
+        
+        titleField.contentVerticalAlignment = .center
+        noteField.contentVerticalAlignment = .top
     }
     
     func prepareForEdit() {
     }
 }
 
-
+extension CreateNoteViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    //функция которая позволяет редактирование текстФилда
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if isEditing == false {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    //Изменение "Edit" на "Done"
+    @objc func showEditing(sender: UIBarButtonItem) {
+        if(isEditing == false) {
+            isEditing = true
+            navigationItem.rightBarButtonItem?.title = "Done"
+        } else {
+            isEditing = false
+            navigationItem.rightBarButtonItem?.title = "Edit"
+        }
+    }
+    
+    func saveChanges() {
+        
+    }
+}

@@ -15,11 +15,10 @@
 		5270338D241F609700694C46 /* EvoMobileLab.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5270338B241F609700694C46 /* EvoMobileLab.xcdatamodeld */; };
 		5270338F241F609800694C46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5270338E241F609800694C46 /* Assets.xcassets */; };
 		52703392241F609800694C46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52703390241F609800694C46 /* LaunchScreen.storyboard */; };
-		527033C12421FC2A00694C46 /* DisplayNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527033C02421FC2A00694C46 /* DisplayNoteViewController.swift */; };
 		527033C32421FC6B00694C46 /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527033C22421FC6B00694C46 /* CreateNoteViewController.swift */; };
-		5275E18F242C8C5C003A457E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275E18E242C8C5C003A457E /* Model.swift */; };
 		52825E5124473769002CA1EA /* SingleNote+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52825E4F24473769002CA1EA /* SingleNote+CoreDataClass.swift */; };
 		52825E5224473769002CA1EA /* SingleNote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52825E5024473769002CA1EA /* SingleNote+CoreDataProperties.swift */; };
+		52CFFB092455EC2B00398794 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CFFB082455EC2B00398794 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,11 +32,10 @@
 		5270338E241F609800694C46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52703391241F609800694C46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52703393241F609800694C46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		527033C02421FC2A00694C46 /* DisplayNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayNoteViewController.swift; sourceTree = "<group>"; };
 		527033C22421FC6B00694C46 /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
-		5275E18E242C8C5C003A457E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		52825E4F24473769002CA1EA /* SingleNote+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SingleNote+CoreDataClass.swift"; sourceTree = "<group>"; };
 		52825E5024473769002CA1EA /* SingleNote+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SingleNote+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		52CFFB082455EC2B00398794 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = Model/Model.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +77,6 @@
 				52703388241F609700694C46 /* Main.storyboard */,
 				521D6D3C243B6BF500723F7C /* NoteCell.swift */,
 				527033C22421FC6B00694C46 /* CreateNoteViewController.swift */,
-				527033C02421FC2A00694C46 /* DisplayNoteViewController.swift */,
 				5270338E241F609800694C46 /* Assets.xcassets */,
 				52703390241F609800694C46 /* LaunchScreen.storyboard */,
 				52703393241F609800694C46 /* Info.plist */,
@@ -91,7 +88,7 @@
 		5275E18D242C8C2F003A457E /* New Group */ = {
 			isa = PBXGroup;
 			children = (
-				5275E18E242C8C5C003A457E /* Model.swift */,
+				52CFFB082455EC2B00398794 /* Model.swift */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";
@@ -171,10 +168,9 @@
 				52825E5124473769002CA1EA /* SingleNote+CoreDataClass.swift in Sources */,
 				52703383241F609700694C46 /* AppDelegate.swift in Sources */,
 				5270338D241F609700694C46 /* EvoMobileLab.xcdatamodeld in Sources */,
-				527033C12421FC2A00694C46 /* DisplayNoteViewController.swift in Sources */,
-				5275E18F242C8C5C003A457E /* Model.swift in Sources */,
 				52703385241F609700694C46 /* SceneDelegate.swift in Sources */,
 				52825E5224473769002CA1EA /* SingleNote+CoreDataProperties.swift in Sources */,
+				52CFFB092455EC2B00398794 /* Model.swift in Sources */,
 				527033C32421FC6B00694C46 /* CreateNoteViewController.swift in Sources */,
 				521D6D3D243B6BF500723F7C /* NoteCell.swift in Sources */,
 			);

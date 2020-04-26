@@ -94,11 +94,11 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="0ZB-dR-kOF" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="2Tf-Vt-sej"/>
+                            <constraint firstItem="0ZB-dR-kOF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3Ub-l1-KS8"/>
                             <constraint firstItem="mis-WR-Ktz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="I66-9q-N1q"/>
-                            <constraint firstItem="0ZB-dR-kOF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="MYJ-lz-7Iw"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="0ZB-dR-kOF" secondAttribute="bottom" id="V3c-rM-rgJ"/>
-                            <constraint firstItem="0ZB-dR-kOF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YWH-06-KMA"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0ZB-dR-kOF" secondAttribute="trailing" id="YwP-Oi-AN7"/>
+                            <constraint firstItem="0ZB-dR-kOF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="L7C-LD-QIW"/>
+                            <constraint firstItem="0ZB-dR-kOF" firstAttribute="centerX" secondItem="mis-WR-Ktz" secondAttribute="centerX" id="gXY-8j-p6Y"/>
                             <constraint firstItem="mis-WR-Ktz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="xSs-Ag-VrU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -127,10 +127,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pTG-sZ-ryL">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pTG-sZ-ryL">
                                 <rect key="frame" x="10" y="54" width="394" height="52"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="wAy-qb-dWh"/>
+                                    <constraint firstAttribute="height" constant="52" id="yC8-Fv-qCM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -143,13 +143,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="FMZ-e6-bfF" firstAttribute="trailing" secondItem="uMI-js-KVj" secondAttribute="trailing" constant="10" id="DgY-Qq-LKo"/>
-                            <constraint firstItem="FMZ-e6-bfF" firstAttribute="trailing" secondItem="pTG-sZ-ryL" secondAttribute="trailing" constant="10" id="HLe-dO-HJ0"/>
-                            <constraint firstItem="FMZ-e6-bfF" firstAttribute="bottom" secondItem="uMI-js-KVj" secondAttribute="bottom" constant="10" id="RAh-Gh-3Ph"/>
-                            <constraint firstItem="pTG-sZ-ryL" firstAttribute="top" secondItem="FMZ-e6-bfF" secondAttribute="top" constant="10" id="ezE-wh-w3W"/>
-                            <constraint firstItem="uMI-js-KVj" firstAttribute="leading" secondItem="FMZ-e6-bfF" secondAttribute="leading" constant="10" id="oed-O7-1AF"/>
-                            <constraint firstItem="uMI-js-KVj" firstAttribute="top" secondItem="pTG-sZ-ryL" secondAttribute="bottom" constant="10" id="uG9-5D-sgR"/>
-                            <constraint firstItem="pTG-sZ-ryL" firstAttribute="leading" secondItem="FMZ-e6-bfF" secondAttribute="leading" constant="10" id="uOp-5Z-SmU"/>
+                            <constraint firstItem="uMI-js-KVj" firstAttribute="leading" secondItem="pTG-sZ-ryL" secondAttribute="leading" id="GCN-N3-v6b"/>
+                            <constraint firstItem="uMI-js-KVj" firstAttribute="trailing" secondItem="pTG-sZ-ryL" secondAttribute="trailing" id="LKK-l2-tOr"/>
+                            <constraint firstItem="uMI-js-KVj" firstAttribute="top" secondItem="pTG-sZ-ryL" secondAttribute="bottom" constant="10" id="R6g-EB-Ee2"/>
+                            <constraint firstItem="uMI-js-KVj" firstAttribute="top" secondItem="pTG-sZ-ryL" secondAttribute="bottom" constant="10" id="WAV-V9-5nQ"/>
+                            <constraint firstItem="FMZ-e6-bfF" firstAttribute="bottom" secondItem="uMI-js-KVj" secondAttribute="bottom" constant="10" id="YdE-cl-Nw1"/>
+                            <constraint firstItem="pTG-sZ-ryL" firstAttribute="leading" secondItem="FMZ-e6-bfF" secondAttribute="leading" constant="10" id="oCr-dX-NAM"/>
+                            <constraint firstItem="pTG-sZ-ryL" firstAttribute="centerX" secondItem="sGY-kR-i1V" secondAttribute="centerX" id="sHg-S7-FiC"/>
+                            <constraint firstItem="pTG-sZ-ryL" firstAttribute="top" secondItem="FMZ-e6-bfF" secondAttribute="top" constant="10" id="xAd-uE-LPc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FMZ-e6-bfF"/>
                     </view>
@@ -162,49 +163,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g5q-g6-ggb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1530.4347826086957" y="126.5625"/>
-        </scene>
-        <!--Display Note View Controller-->
-        <scene sceneID="WI7-Z4-ByX">
-            <objects>
-                <viewController storyboardIdentifier="note" id="SU1-Jy-V5i" customClass="DisplayNoteViewController" customModule="EvoMobileLab" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="a25-Ps-ZZy">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xYz-Xi-Ndp">
-                                <rect key="frame" x="10" y="116" width="394" height="736"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eGT-LI-gVA">
-                                <rect key="frame" x="10" y="54" width="394" height="52"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="4Yl-ra-fEn"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="xYz-Xi-Ndp" firstAttribute="top" secondItem="eGT-LI-gVA" secondAttribute="bottom" constant="10" id="1MC-R3-qt8"/>
-                            <constraint firstItem="fLx-3l-xEw" firstAttribute="trailing" secondItem="eGT-LI-gVA" secondAttribute="trailing" constant="10" id="3lG-ve-YKO"/>
-                            <constraint firstItem="eGT-LI-gVA" firstAttribute="leading" secondItem="fLx-3l-xEw" secondAttribute="leading" constant="10" id="G4P-5t-mRu"/>
-                            <constraint firstItem="xYz-Xi-Ndp" firstAttribute="leading" secondItem="fLx-3l-xEw" secondAttribute="leading" constant="10" id="Poa-kr-i8A"/>
-                            <constraint firstItem="fLx-3l-xEw" firstAttribute="trailing" secondItem="xYz-Xi-Ndp" secondAttribute="trailing" constant="10" id="at6-dl-kTH"/>
-                            <constraint firstItem="eGT-LI-gVA" firstAttribute="top" secondItem="fLx-3l-xEw" secondAttribute="top" constant="10" id="e14-j6-3nr"/>
-                            <constraint firstItem="fLx-3l-xEw" firstAttribute="bottom" secondItem="xYz-Xi-Ndp" secondAttribute="bottom" constant="10" id="iTh-Ix-8WK"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="fLx-3l-xEw"/>
-                    </view>
-                    <connections>
-                        <outlet property="noteField" destination="xYz-Xi-Ndp" id="kH4-9C-CSa"/>
-                        <outlet property="titleField" destination="eGT-LI-gVA" id="vKy-nE-X4W"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MtH-Yy-PKA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2194.202898550725" y="122.54464285714285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2rc-5c-q1G">

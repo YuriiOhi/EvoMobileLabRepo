@@ -29,25 +29,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
         }
+        vc.currentState = .create
         vc.noteDelegate = self
-
-        vc.completion = { [weak self] noteTitle, noteText, noteDate in
-            let entity = NSEntityDescription.entity(forEntityName: "SingleNote", in: self!.context)!
-            let note = SingleNoteMO(entity: entity, insertInto: self!.context)
-            note.setValue(noteTitle, forKeyPath: "title")
-            note.setValue(noteText, forKeyPath: "text")
-            note.setValue(noteDate, forKey: "creationTimeStamp")
-            do {
-                self!.models.append(note)
-                try self!.context.save()
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-            }
-            self?.navigationController?.popToRootViewController(animated: true)
-            self?.titleLabel.isHidden = true
-            self?.tableView.isHidden = false
-            self?.tableView.reloadData()
-        }
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -57,14 +40,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = models[indexPath.row]
-        guard let vc = storyboard?.instantiateViewController(identifier: "note") as? DisplayNoteViewController else {
+        guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
         }
-        vc.navigationItem.largeTitleDisplayMode = .never
-        vc.title = "Note"
+        vc.currentState = .display
+        vc.noteDelegate = self
         vc.noteTitle = model.value(forKeyPath: "title") as! String
         vc.noteText = model.value(forKeyPath: "text") as! String
-        //self.state = .display
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -97,7 +79,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             removeRow(at: indexPath)
         }
     }
-    
 }
 
 extension ViewController {
@@ -140,7 +121,32 @@ extension ViewController {
 }
 
 extension ViewController: NoteDelegate {
-    func createNote(title: String, text: String, creationStamp: Date) {}
+    func displayNote(title: String, text: String) {
+        print("21")    }
+    
+    
+    func createNote(title: String, text: String, creationStamp: Date, uuidString: UUID) {
+        let entity = NSEntityDescription.entity(forEntityName: "SingleNote", in: self.context)!
+        let note = SingleNoteMO(entity: entity, insertInto: self.context)
+        note.setValue(title, forKeyPath: "title")
+        note.setValue(text, forKeyPath: "text")
+        note.setValue(creationStamp, forKey: "creationTimeStamp")
+        note.setValue(uuidString, forKey: "uuidString")
+        do {
+            self.models.append(note)
+            try self.context.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        tableView.reloadData()
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+//    func displayNote(title: String, text: String) {
+//        let model = models[indexPath.row]
+//        title = model.value(forKeyPath: "title") as! String
+//        text = model.value(forKeyPath: "text") as! String
+//    }
 }
 
 
