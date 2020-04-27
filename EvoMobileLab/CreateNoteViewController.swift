@@ -13,7 +13,8 @@ enum State {
 // Notes Adding and Saving VC
 protocol NoteDelegate: AnyObject {
     func createNote(title: String, text: String, creationStamp: Date, uuidString: UUID)
-    func displayNote(title: String, text: String)
+    //func displayNote(title: String, text: String)
+    func updateNote(title: String, text: String)
 }
 class CreateNoteViewController: UIViewController {
     
@@ -66,7 +67,7 @@ class CreateNoteViewController: UIViewController {
         noteField.becomeFirstResponder()
         titleField.text = noteTitle
         noteField.text = noteText
-     
+        
         titleField.delegate = self
         noteField.delegate = self
         
@@ -106,16 +107,13 @@ extension CreateNoteViewController: UITextFieldDelegate {
     
     //Изменение "Edit" на "Done"
     @objc func showEditing(sender: UIBarButtonItem) {
-        if(isEditing == false) {
+        if ( isEditing == false ) {
             isEditing = true
             navigationItem.rightBarButtonItem?.title = "Done"
         } else {
             isEditing = false
+            noteDelegate!.updateNote(title: noteTitle, text: noteText)
             navigationItem.rightBarButtonItem?.title = "Edit"
         }
-    }
-    
-    func saveChanges() {
-        
     }
 }

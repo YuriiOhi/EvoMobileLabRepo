@@ -5,7 +5,7 @@
 //  Created by Yurii on 2020/3/16.
 //  Copyright © 2020 Yurii. All rights reserved.
 //
-
+import Foundation
 import UIKit
 import CoreData
 
@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var titleLabel: UILabel!
     let context = AppDelegate.shared.persistentContainer.viewContext
     var models: [SingleNoteMO] = []
+    var selectedNoteUUID: UUID?
     //loadView 1st
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = models[indexPath.row]
+        selectedNoteUUID = model.uuidString
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
         }
@@ -121,9 +123,6 @@ extension ViewController {
 }
 
 extension ViewController: NoteDelegate {
-    func displayNote(title: String, text: String) {
-        print("21")    }
-    
     
     func createNote(title: String, text: String, creationStamp: Date, uuidString: UUID) {
         let entity = NSEntityDescription.entity(forEntityName: "SingleNote", in: self.context)!
@@ -142,12 +141,22 @@ extension ViewController: NoteDelegate {
         navigationController?.popToRootViewController(animated: true)
     }
     
-//    func displayNote(title: String, text: String) {
-//        let model = models[indexPath.row]
-//        title = model.value(forKeyPath: "title") as! String
-//        text = model.value(forKeyPath: "text") as! String
-//    }
+    func updateNote(title: String, text: String) {
+        models.forEach { model in
+            if (selectedNoteUUID == model.uuidString) {
+//                print("This is the value of selectedNoteUUID \(selectedNoteUUID)")
+//                print("This is the value of model.uuidString \(model.uuidString)")
+                model.title = title
+                model.text = text
+                do {
+                    try self.context.save()
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                }
+            }
+        }
+        
+        tableView.reloadData()
+        navigationController?.popToRootViewController(animated: true)
+    }
 }
-
-
-
