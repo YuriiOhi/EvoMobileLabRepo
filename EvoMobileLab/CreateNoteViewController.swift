@@ -13,7 +13,6 @@ enum State {
 // Notes Adding and Saving VC
 protocol NoteDelegate: AnyObject {
     func createNote(title: String, text: String, creationStamp: Date, uuidString: UUID)
-    //func displayNote(title: String, text: String)
     func updateNote(title: String, text: String)
 }
 class CreateNoteViewController: UIViewController {
@@ -27,6 +26,7 @@ class CreateNoteViewController: UIViewController {
     weak var noteDelegate: NoteDelegate?
     
     var currentState: State = .create
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUIWithState(state: currentState)
@@ -74,7 +74,7 @@ class CreateNoteViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
                                                             style: UIBarButtonItem.Style.plain,
                                                             target: self,
-                                                            action: #selector(showEditing))
+                                                            action: #selector(editScreenAction))
         
         titleField.borderStyle = UITextField.BorderStyle.none
         noteField.borderStyle = UITextField.BorderStyle.none
@@ -88,6 +88,22 @@ class CreateNoteViewController: UIViewController {
     
     func prepareForEdit() {
     }
+    
+    @objc func editScreenAction(sender: UIBarButtonItem) {
+        if currentState == .display  {
+            currentState = .edit
+            navigationItem.rightBarButtonItem?.title = "Done"
+        }
+        if currentState == .create {
+            guard let titleText = titleField.text, !titleText.isEmpty, let descriptionText = noteField.text, !descriptionText.isEmpty else { return }
+            noteDelegate!.createNote(title: titleText, text: descriptionText, creationStamp: Date(), uuidString: UUID())
+        } else {
+            guard let titleText = titleField.text, let descriptionText = noteField.text else { return }
+            noteDelegate!.updateNote(title: titleText, text: descriptionText)
+            navigationItem.rightBarButtonItem?.title = "Edit"
+            currentState = .display
+        }
+    }
 }
 
 extension CreateNoteViewController: UITextFieldDelegate {
@@ -98,22 +114,11 @@ extension CreateNoteViewController: UITextFieldDelegate {
     
     //функция которая позволяет редактирование текстФилда
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if isEditing == false {
-            return false
-        } else {
-            return true
-        }
+        return currentState != .display
     }
     
-    //Изменение "Edit" на "Done"
-    @objc func showEditing(sender: UIBarButtonItem) {
-        if ( isEditing == false ) {
-            isEditing = true
-            navigationItem.rightBarButtonItem?.title = "Done"
-        } else {
-            isEditing = false
-            noteDelegate!.updateNote(title: noteTitle, text: noteText)
-            navigationItem.rightBarButtonItem?.title = "Edit"
-        }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return currentState != .display
     }
+    
 }

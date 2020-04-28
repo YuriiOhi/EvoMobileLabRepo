@@ -144,8 +144,6 @@ extension ViewController: NoteDelegate {
     func updateNote(title: String, text: String) {
         models.forEach { model in
             if (selectedNoteUUID == model.uuidString) {
-//                print("This is the value of selectedNoteUUID \(selectedNoteUUID)")
-//                print("This is the value of model.uuidString \(model.uuidString)")
                 model.title = title
                 model.text = text
                 do {
