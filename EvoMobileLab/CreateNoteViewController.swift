@@ -15,31 +15,38 @@ protocol NoteDelegate: AnyObject {
     func createNote(title: String, text: String, creationStamp: Date, uuidString: UUID)
     func updateNote(title: String, text: String)
 }
+
 class CreateNoteViewController: UIViewController {
-    
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var noteField: UITextField!
-    
     public var noteTitle: String = ""
     public var noteText: String = ""
-        
     weak var noteDelegate: NoteDelegate?
-    
     var currentState: State = .create
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUIWithState(state: currentState)
     }
     
-    @objc func didTapNewNote() {
-        if let title = titleField.text, !title.isEmpty, let text = noteField.text, !text.isEmpty {
-            noteDelegate!.createNote(title: title, text: text, creationStamp: Date(), uuidString: UUID())
+    @objc func editScreenAction(sender: UIBarButtonItem) {
+        
+        if currentState == .create {
+            guard let titleText = titleField.text, !titleText.isEmpty, let descriptionText = noteField.text, !descriptionText.isEmpty else { return }
+            noteDelegate!.createNote(title: titleText, text: descriptionText, creationStamp: Date(), uuidString: UUID())
+        }
+         
+        if currentState == .display  {
+            guard let titleText = titleField.text, let descriptionText = noteField.text else { return }
+            shareNote(title: titleText, text: descriptionText)
+            
+       } else {
+            guard let titleText = titleField.text, let descriptionText = noteField.text else { return }
+            noteDelegate!.updateNote(title: titleText, text: descriptionText)
+            currentState = .display
         }
     }
     
     func updateUIWithState(state: State) {
-        
         switch state {
         case .create:
             prepareForCreate()
@@ -58,7 +65,7 @@ class CreateNoteViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
                                                             style: .done,
                                                             target: self,
-                                                            action: #selector(didTapNewNote))
+                                                            action: #selector(editScreenAction))
     }
     
     func prepareForDisplay() {
@@ -70,8 +77,31 @@ class CreateNoteViewController: UIViewController {
         
         titleField.delegate = self
         noteField.delegate = self
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share",
+                                                            style: UIBarButtonItem.Style.plain,
+                                                            target: self,
+                                                            action: #selector(editScreenAction))
+        titleField.borderStyle = UITextField.BorderStyle.none
+        noteField.borderStyle = UITextField.BorderStyle.none
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
+        titleField.textAlignment = .left
+        noteField.textAlignment = .left
+        
+        titleField.contentVerticalAlignment = .center
+        noteField.contentVerticalAlignment = .top
+    }
+    
+    func prepareForEdit() {
+        navigationItem.largeTitleDisplayMode = .never
+        title = "Note"
+        noteField.becomeFirstResponder()
+        titleField.text = noteTitle
+        noteField.text = noteText
+        
+        titleField.delegate = self
+        noteField.delegate = self
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done",
                                                             style: UIBarButtonItem.Style.plain,
                                                             target: self,
                                                             action: #selector(editScreenAction))
@@ -85,25 +115,6 @@ class CreateNoteViewController: UIViewController {
         titleField.contentVerticalAlignment = .center
         noteField.contentVerticalAlignment = .top
     }
-    
-    func prepareForEdit() {
-    }
-    
-    @objc func editScreenAction(sender: UIBarButtonItem) {
-        if currentState == .display  {
-            currentState = .edit
-            navigationItem.rightBarButtonItem?.title = "Done"
-        }
-        if currentState == .create {
-            guard let titleText = titleField.text, !titleText.isEmpty, let descriptionText = noteField.text, !descriptionText.isEmpty else { return }
-            noteDelegate!.createNote(title: titleText, text: descriptionText, creationStamp: Date(), uuidString: UUID())
-        } else {
-            guard let titleText = titleField.text, let descriptionText = noteField.text else { return }
-            noteDelegate!.updateNote(title: titleText, text: descriptionText)
-            navigationItem.rightBarButtonItem?.title = "Edit"
-            currentState = .display
-        }
-    }
 }
 
 extension CreateNoteViewController: UITextFieldDelegate {
@@ -111,14 +122,22 @@ extension CreateNoteViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
     //функция которая позволяет редактирование текстФилда
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return currentState != .display
     }
-    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return currentState != .display
     }
+}
+
+extension CreateNoteViewController {
     
+    @objc func shareNote(title: String, text: String) {
+        let shareText = "\(title) \(text) "
+        if shareText != nil {
+            let vc = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
+            present(vc, animated: true)
+        }
+    }
 }

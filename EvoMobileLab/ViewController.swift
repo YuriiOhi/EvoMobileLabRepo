@@ -22,10 +22,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         title = "Notes"
+        
         initialLoad()
     }
     
-    @IBAction func didTapNewNote() {
+    @IBAction func editScreenAction() {
         
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
@@ -41,7 +42,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = models[indexPath.row]
-        selectedNoteUUID = model.uuidString
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
         }
@@ -52,6 +52,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
+            guard let vc = self.storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
+                return }
+            let model = self.models[indexPath.row]
+            self.selectedNoteUUID = model.uuidString
+            vc.currentState = .edit
+            vc.noteDelegate = self
+            vc.noteTitle = model.title!
+            vc.noteText = model.text!
+            completionHandler(true)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        let delete = UIContextualAction(style: .normal, title: "Delete") { (action, view, completionHandler) in
+            self.removeRow(at: indexPath)
+            completionHandler(true)
+        }
+        edit.image = UIImage(named: "Edit")
+        edit.backgroundColor = .clear
+        delete.backgroundColor = .red
+        let swipe = UISwipeActionsConfiguration(actions: [delete, edit])
+        return swipe
+    }
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,12 +97,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            removeRow(at: indexPath)
-        }
     }
 }
 
@@ -111,6 +128,15 @@ extension ViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
+        
+//        func limitLabelLength() {
+//            if ([titleLabel.text length] > 15) {
+//                // User cannot type more than 15 characters
+//                self.categoryField.text = [self.categoryField.text, substringToIndex: 15]
+//            }
+//
+//        }
+    
     
     private func removeRow(at indexPath: IndexPath) {
         let noteToDelete = models[indexPath.row]
@@ -158,3 +184,5 @@ extension ViewController: NoteDelegate {
         navigationController?.popToRootViewController(animated: true)
     }
 }
+// сделать метод сетМодел инкапсулировать передачу данных/ модель нужна для передачи данных
+// использование айди увеличивает возможность совершить ошибку. // может нужно было использовать Сет для хранения заметок

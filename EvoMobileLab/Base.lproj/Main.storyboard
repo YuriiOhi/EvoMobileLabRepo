@@ -106,7 +106,7 @@
                     <navigationItem key="navigationItem" title="Notes" id="sjf-Gm-sRi">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="VST-wA-o4G">
                             <connections>
-                                <action selector="didTapNewNote" destination="BYZ-38-t0r" id="yTk-KV-plh"/>
+                                <action selector="editScreenAction" destination="BYZ-38-t0r" id="utt-AM-OI7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
