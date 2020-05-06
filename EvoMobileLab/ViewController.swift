@@ -28,15 +28,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchControllerConfig()
     }
     
-   
     @IBAction func sortNotesBy() {
         uiActionSheet()
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//           present(alertController, animated: true, completion: nil)
-//       }
-//
     @IBAction func manageNotesActions() {
 
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
@@ -46,9 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc.noteDelegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
-    
+
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -135,21 +128,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 }
 
 extension ViewController {
-    func formattedDateString(date: Date) -> String {
-        var timeSince1970: Double
-        timeSince1970 = date.timeIntervalSince1970
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yy"
-        return dateFormatter.string(from: Date(timeIntervalSince1970: timeSince1970))
-    }
-    
-    func formattedTimeString(date: Date) -> String {
-        var timeSince1970: Double
-        timeSince1970 = date.timeIntervalSince1970
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
-        return dateFormatter.string(from: Date(timeIntervalSince1970: timeSince1970))
-    }
     
     func initialLoad() {
         let fetchRequest = NSFetchRequest<SingleNoteMO>(entityName: "SingleNote")
@@ -194,7 +172,23 @@ extension ViewController {
         models.remove(at: indexPath.row )//pull out the NSManObj object that I selected to delete
         context.delete(noteToDelete) //removes it from the managed object context,
         AppDelegate.shared.saveContext() // save changes in ManObjContext
-        tableView.deleteRows(at: [indexPath], with: .fade) //если раскоментить аппа будет крашится в том числе если добавить begin/endUpdates(
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    
+    func formattedDateString(date: Date) -> String {
+        var timeSince1970: Double
+        timeSince1970 = date.timeIntervalSince1970
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yy"
+        return dateFormatter.string(from: Date(timeIntervalSince1970: timeSince1970))
+    }
+    
+    func formattedTimeString(date: Date) -> String {
+        var timeSince1970: Double
+        timeSince1970 = date.timeIntervalSince1970
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        return dateFormatter.string(from: Date(timeIntervalSince1970: timeSince1970))
     }
     
 }
