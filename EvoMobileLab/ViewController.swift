@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import CoreData
 
+enum SortType {
+    case creationDate, editingDate, alphabetically
+}
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIApplicationDelegate {
     
     @IBOutlet weak var tableView: UITableView!
@@ -17,6 +21,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var models: [SingleNoteMO] = []
     var filteredModels: [SingleNoteMO] = []
     var selectedNoteUUID: UUID?
+    var defaultSort: SortType = .creationDate
     let searchController = UISearchController(searchResultsController: nil) // By initializing UISearchController with a nil value for searchResultsController, you’re telling the search controller that you want to use the same view you’re searching to display the results.
     //loadView 1st
     override func viewDidLoad() {
@@ -33,7 +38,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func manageNotesActions() {
-
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
         }
@@ -149,13 +153,13 @@ extension ViewController {
                                                 handler: { (alertaction) in print("cancel")}))
         alertController.addAction(UIAlertAction(title: "Sorting by Alphabet",
                                                 style: .default,
-                                                handler: { (alertaction) in print("Date of Creation")}))
+                                                handler: { (alertaction) in self.manageSorting(typeOfSorting: .alphabetically)}))
         alertController.addAction(UIAlertAction(title: "Sorting by the Date of Creation",
                                                 style: .default,
-                                                handler: { (alertaction) in print("Date of Creation")}))
+                                                handler: { (alertaction) in self.manageSorting(typeOfSorting: .creationDate)}))
         alertController.addAction(UIAlertAction(title: "Sorting by the Date of Editing ",
                                                 style: .default,
-                                                handler: { (alertaction) in print(" Date of Editing")}))
+                                                handler: { (alertaction) in self.manageSorting(typeOfSorting: .editingDate)}))
         present(alertController, animated: true, completion: nil)
 
     }
@@ -225,7 +229,6 @@ extension ViewController: NoteDelegate {
                     print("Could not save. \(error), \(error.userInfo)")
                 }
             }
-            selectedNoteUUID = nil
         }
         
         tableView.reloadData()
@@ -240,25 +243,21 @@ extension ViewController: UISearchResultsUpdating {
         let searchBar = searchController.searchBar
         filterContentForSearchText(searchBar.text!)
     }
-    
     func searchControllerConfig() {
            searchController.searchResultsUpdater = self
            searchController.obscuresBackgroundDuringPresentation = false
            navigationItem.searchController = searchController
            definesPresentationContext = true
     }
-    
     var isSearchBarEmpty: Bool { // computed property
         return searchController.searchBar.text?.isEmpty ?? true
     }
-    
     func filterContentForSearchText(_ searchText: String) {
         filteredModels = models.filter { (model: SingleNoteMO) -> Bool in
             return (model.text?.lowercased().contains(searchText.lowercased()))!
         }
         tableView.reloadData()
     }
-    
     var isFiltering: Bool {
         return searchController.isActive && !isSearchBarEmpty
     }
@@ -266,3 +265,38 @@ extension ViewController: UISearchResultsUpdating {
 // сделать метод сетМодел инкапсулировать передачу данных/ модель нужна для передачи данных
 // использование айди увеличивает возможность совершить ошибку. // может нужно было использовать Сет для хранения заметок
 // можно добавить выбор фильтра по темам или тексту и показывать сколько заметок отфильтровано из всех
+extension ViewController {
+    func manageSorting(typeOfSorting: SortType) {
+        switch  typeOfSorting {
+            
+        case .creationDate:
+            let fetchRequest = NSFetchRequest<SingleNoteMO>(entityName: "SingleNote")
+            do {
+                models = try context.fetch(fetchRequest)
+                models.sort { (note1, note2) -> Bool in
+                    note1.creationTimeStamp > note2.creationTimeStamp
+                }
+                tableView.reloadData()
+                tableView.isHidden = false
+            } catch let error as NSError {
+                print("Could not fetch. \(error), \(error.userInfo)")
+            }
+            
+        case .editingDate:
+            let fetchRequest = NSFetchRequest<SingleNoteMO>(entityName: "SingleNote")
+            do {
+                models = try context.fetch(fetchRequest)
+                models.sort { (note1, note2) -> Bool in
+                    note1.editingTimeStamp > note2.editingTimeStamp
+                }
+                tableView.reloadData()
+                tableView.isHidden = false
+            } catch let error as NSError {
+                print("Could not fetch. \(error), \(error.userInfo)")
+            }
+            
+        case .alphabetically:
+            print("ABC")
+        }
+    }
+}

@@ -110,7 +110,7 @@
                                     <action selector="manageNotesActions" destination="BYZ-38-t0r" id="7Tr-J0-XHc"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem style="plain" systemItem="action" id="pWB-yo-8zb">
+                            <barButtonItem systemItem="action" id="pWB-yo-8zb">
                                 <connections>
                                     <action selector="sortNotesBy" destination="BYZ-38-t0r" id="Xus-aa-GXJ"/>
                                 </connections>
