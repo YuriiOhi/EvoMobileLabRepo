@@ -2,11 +2,12 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="SingleNoteMO">
     <entity name="SingleNote" representedClassName=".SingleNoteMO" syncable="YES">
         <attribute name="creationTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="editingTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="uuidString" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="SingleNote" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="SingleNote" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>

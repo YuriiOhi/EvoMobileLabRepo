@@ -15,17 +15,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var titleLabel: UILabel!
     let context = AppDelegate.shared.persistentContainer.viewContext
     var models: [SingleNoteMO] = []
+    var filteredModels: [SingleNoteMO] = []
     var selectedNoteUUID: UUID?
+    let searchController = UISearchController(searchResultsController: nil) // By initializing UISearchController with a nil value for searchResultsController, you’re telling the search controller that you want to use the same view you’re searching to display the results.
     //loadView 1st
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         title = "Notes"
-        
         initialLoad()
+        searchControllerConfig()
     }
     
+   
+    @IBAction func sortNotesBy() {
+        uiActionSheet()
+    }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//           present(alertController, animated: true, completion: nil)
+//       }
+//
     @IBAction func editScreenAction() {
         
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
@@ -37,17 +48,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let model = models[indexPath.row]
+        let model: SingleNoteMO
+        if isFiltering {
+            model = filteredModels[indexPath.row]
+        } else {
+            model = models[indexPath.row]
+        }
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
         }
         vc.currentState = .display
         vc.noteDelegate = self
-        vc.noteTitle = model.value(forKeyPath: "title") as! String
+        vc.noteTitle =  model.value(forKeyPath: "title") as! String
         vc.noteText = model.value(forKeyPath: "text") as! String
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -56,7 +73,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
             guard let vc = self.storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
                 return }
-            let model = self.models[indexPath.row]
+            let model: SingleNoteMO
+            if self.isFiltering {
+                model = self.filteredModels[indexPath.row]
+            } else {
+                model = self.models[indexPath.row]
+            }
             self.selectedNoteUUID = model.uuidString
             vc.currentState = .edit
             vc.noteDelegate = self
@@ -78,12 +100,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        models.count
+        if isFiltering {
+            return filteredModels.count
+        }
+        return models.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 68.0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NoteCell
+        let model: SingleNoteMO
+        if isFiltering {
+            model = filteredModels[indexPath.row]
+        } else {
+             model = models[indexPath.row]
+        }
         if let date = model.value(forKeyPath: "creationTimeStamp") as? Date {
             cell.timeLabel?.text = formattedTimeString(date: date)
             cell.dateLabel?.text = formattedDateString(date: date)
@@ -128,7 +162,25 @@ extension ViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
-        
+    
+    func uiActionSheet() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        alertController.addAction(UIAlertAction(title: "Cancel",
+                                                style: .cancel,
+                                                handler: { (alertaction) in print("cancel")}))
+        alertController.addAction(UIAlertAction(title: "Sorting by Alphabet",
+                                                style: .default,
+                                                handler: { (alertaction) in print("Date of Creation")}))
+        alertController.addAction(UIAlertAction(title: "Sorting by the Date of Creation",
+                                                style: .default,
+                                                handler: { (alertaction) in print("Date of Creation")}))
+        alertController.addAction(UIAlertAction(title: "Sorting by the Date of Editing ",
+                                                style: .default,
+                                                handler: { (alertaction) in print(" Date of Editing")}))
+        present(alertController, animated: true, completion: nil)
+
+    }
 //        func limitLabelLength() {
 //            if ([titleLabel.text length] > 15) {
 //                // User cannot type more than 15 characters
@@ -136,7 +188,6 @@ extension ViewController {
 //            }
 //
 //        }
-    
     
     private func removeRow(at indexPath: IndexPath) {
         let noteToDelete = models[indexPath.row]
@@ -150,13 +201,14 @@ extension ViewController {
 
 extension ViewController: NoteDelegate {
     
-    func createNote(title: String, text: String, creationStamp: Date, uuidString: UUID) {
+    func createNote(title: String, text: String, creationStamp: Date, editingStamp: Date, uuidString: UUID) {
         let entity = NSEntityDescription.entity(forEntityName: "SingleNote", in: self.context)!
         let note = SingleNoteMO(entity: entity, insertInto: self.context)
         note.setValue(title, forKeyPath: "title")
         note.setValue(text, forKeyPath: "text")
         note.setValue(creationStamp, forKey: "creationTimeStamp")
         note.setValue(uuidString, forKey: "uuidString")
+        note.setValue(editingStamp, forKey: "editingTimeStamp")
         do {
             self.models.append(note)
             try self.context.save()
@@ -167,11 +219,12 @@ extension ViewController: NoteDelegate {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func updateNote(title: String, text: String) {
+    func updateNote(title: String, text: String, editingStamp: Date) {
         models.forEach { model in
             if (selectedNoteUUID == model.uuidString) {
                 model.title = title
                 model.text = text
+                model.editingTimeStamp = editingStamp
                 do {
                     try self.context.save()
                 } catch let error as NSError {
@@ -184,5 +237,37 @@ extension ViewController: NoteDelegate {
         navigationController?.popToRootViewController(animated: true)
     }
 }
+
+// MARK: - SearchBar Implementation
+extension ViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
+    }
+    
+    func searchControllerConfig() {
+           searchController.searchResultsUpdater = self
+           searchController.obscuresBackgroundDuringPresentation = false
+           navigationItem.searchController = searchController
+           definesPresentationContext = true
+    }
+    
+    var isSearchBarEmpty: Bool { // computed property
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredModels = models.filter { (model: SingleNoteMO) -> Bool in
+            return (model.text?.lowercased().contains(searchText.lowercased()))!
+        }
+        tableView.reloadData()
+    }
+    
+    var isFiltering: Bool {
+        return searchController.isActive && !isSearchBarEmpty
+    }
+}
 // сделать метод сетМодел инкапсулировать передачу данных/ модель нужна для передачи данных
 // использование айди увеличивает возможность совершить ошибку. // может нужно было использовать Сет для хранения заметок
+// можно добавить выбор фильтра по темам или тексту и показывать сколько заметок отфильтровано из всех

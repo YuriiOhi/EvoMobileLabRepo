@@ -12,8 +12,8 @@ enum State {
 }
 // Notes Adding and Saving VC
 protocol NoteDelegate: AnyObject {
-    func createNote(title: String, text: String, creationStamp: Date, uuidString: UUID)
-    func updateNote(title: String, text: String)
+    func createNote(title: String, text: String, creationStamp: Date, editingStamp: Date,  uuidString: UUID)
+    func updateNote(title: String, text: String, editingStamp: Date)
 }
 
 class CreateNoteViewController: UIViewController {
@@ -32,7 +32,7 @@ class CreateNoteViewController: UIViewController {
         
         if currentState == .create {
             guard let titleText = titleField.text, !titleText.isEmpty, let descriptionText = noteField.text, !descriptionText.isEmpty else { return }
-            noteDelegate!.createNote(title: titleText, text: descriptionText, creationStamp: Date(), uuidString: UUID())
+            noteDelegate!.createNote(title: titleText, text: descriptionText, creationStamp: Date(), editingStamp: Date(), uuidString: UUID())
         }
          
         if currentState == .display  {
@@ -41,7 +41,7 @@ class CreateNoteViewController: UIViewController {
             
        } else {
             guard let titleText = titleField.text, let descriptionText = noteField.text else { return }
-            noteDelegate!.updateNote(title: titleText, text: descriptionText)
+            noteDelegate!.updateNote(title: titleText, text: descriptionText, editingStamp: Date())
             currentState = .display
         }
     }
