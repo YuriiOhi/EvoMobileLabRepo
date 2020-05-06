@@ -28,7 +28,7 @@ class CreateNoteViewController: UIViewController {
         updateUIWithState(state: currentState)
     }
     
-    @objc func editScreenAction(sender: UIBarButtonItem) {
+    @objc func manageNotesActions(sender: UIBarButtonItem) {
         
         if currentState == .create {
             guard let titleText = titleField.text, !titleText.isEmpty, let descriptionText = noteField.text, !descriptionText.isEmpty else { return }
@@ -65,7 +65,7 @@ class CreateNoteViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
                                                             style: .done,
                                                             target: self,
-                                                            action: #selector(editScreenAction))
+                                                            action: #selector(manageNotesActions))
     }
     
     func prepareForDisplay() {
@@ -80,7 +80,7 @@ class CreateNoteViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share",
                                                             style: UIBarButtonItem.Style.plain,
                                                             target: self,
-                                                            action: #selector(editScreenAction))
+                                                            action: #selector(manageNotesActions))
         titleField.borderStyle = UITextField.BorderStyle.none
         noteField.borderStyle = UITextField.BorderStyle.none
         
@@ -104,7 +104,7 @@ class CreateNoteViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done",
                                                             style: UIBarButtonItem.Style.plain,
                                                             target: self,
-                                                            action: #selector(editScreenAction))
+                                                            action: #selector(manageNotesActions))
         
         titleField.borderStyle = UITextField.BorderStyle.none
         noteField.borderStyle = UITextField.BorderStyle.none

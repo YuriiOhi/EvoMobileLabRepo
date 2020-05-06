@@ -37,8 +37,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //           present(alertController, animated: true, completion: nil)
 //       }
 //
-    @IBAction func editScreenAction() {
-        
+    @IBAction func manageNotesActions() {
+
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? CreateNoteViewController else {
             return
         }
@@ -231,6 +231,7 @@ extension ViewController: NoteDelegate {
                     print("Could not save. \(error), \(error.userInfo)")
                 }
             }
+            selectedNoteUUID = nil
         }
         
         tableView.reloadData()
