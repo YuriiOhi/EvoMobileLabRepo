@@ -45,7 +45,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc.noteDelegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -104,7 +104,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 68.0
+        return 100.0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,7 +113,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if isFiltering {
             model = filteredModels[indexPath.row]
         } else {
-             model = models[indexPath.row]
+            model = models[indexPath.row]
         }
         if let date = model.value(forKeyPath: "creationTimeStamp") as? Date {
             cell.timeLabel?.text = formattedTimeString(date: date)
@@ -122,7 +122,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("Corrupted dateLabel again")
         }
         cell.titleLabel?.text = model.value(forKeyPath: "title") as? String
-        cell.noteLabel?.text = model.value(forKeyPath: "text") as? String
+        cell.noteLabel?.text = limitLabel(input: (model.value(forKeyPath: "text") as? String)!) 
         return cell
     }
     
@@ -132,7 +132,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 }
 
 extension ViewController {
-    
     func initialLoad() {
         let fetchRequest = NSFetchRequest<SingleNoteMO>(entityName: "SingleNote")
         do {
@@ -147,7 +146,7 @@ extension ViewController {
     
     func uiActionSheet() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
+        
         alertController.addAction(UIAlertAction(title: "Cancel",
                                                 style: .cancel,
                                                 handler: { (alertaction) in print("cancel")}))
@@ -161,15 +160,15 @@ extension ViewController {
                                                 style: .default,
                                                 handler: { (alertaction) in self.manageSorting(typeOfSorting: .editingDate)}))
         present(alertController, animated: true, completion: nil)
-
+        
     }
-//        func limitLabelLength() {
-//            if ([titleLabel.text length] > 15) {
-//                // User cannot type more than 15 characters
-//                self.categoryField.text = [self.categoryField.text, substringToIndex: 15]
-//            }
-//
-//        }
+    //        func limitLabelLength() {
+    //            if ([titleLabel.text length] > 15) {
+    //                // User cannot type more than 15 characters
+    //                self.categoryField.text = [self.categoryField.text, substringToIndex: 15]
+    //            }
+    //
+    //        }
     
     private func removeRow(at indexPath: IndexPath) {
         let noteToDelete = models[indexPath.row]
@@ -195,6 +194,13 @@ extension ViewController {
         return dateFormatter.string(from: Date(timeIntervalSince1970: timeSince1970))
     }
     
+    func limitLabel(input: String) -> String {
+        if input.count > 100 {
+            return input.substring(with: 1..<101)
+        } else {
+            return input
+        }
+    }
 }
 
 extension ViewController: NoteDelegate {
@@ -244,10 +250,10 @@ extension ViewController: UISearchResultsUpdating {
         filterContentForSearchText(searchBar.text!)
     }
     func searchControllerConfig() {
-           searchController.searchResultsUpdater = self
-           searchController.obscuresBackgroundDuringPresentation = false
-           navigationItem.searchController = searchController
-           definesPresentationContext = true
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     var isSearchBarEmpty: Bool { // computed property
         return searchController.searchBar.text?.isEmpty ?? true
@@ -268,7 +274,6 @@ extension ViewController: UISearchResultsUpdating {
 extension ViewController {
     func manageSorting(typeOfSorting: SortType) {
         switch  typeOfSorting {
-            
         case .creationDate:
             let fetchRequest = NSFetchRequest<SingleNoteMO>(entityName: "SingleNote")
             do {
@@ -296,7 +301,44 @@ extension ViewController {
             }
             
         case .alphabetically:
-            print("ABC")
+            let fetchRequest = NSFetchRequest<SingleNoteMO>(entityName: "SingleNote")
+            do {
+                models = try context.fetch(fetchRequest)
+                models.sort { (note1, note2) in
+                    note1.text < note2.text
+                }
+                tableView.reloadData()
+                tableView.isHidden = false
+            } catch let error as NSError {
+                print("Could not fetch. \(error), \(error.userInfo)")
+            }
         }
+        
     }
 }
+
+
+
+extension String {
+    func index(from: Int) -> Index {
+        return self.index(startIndex, offsetBy: from)
+    }
+    
+    func substring(from: Int) -> String {
+        let fromIndex = index(from: from)
+        return String(self[fromIndex...])
+    }
+    
+    func substring(to: Int) -> String {
+        let toIndex = index(from: to)
+        return String(self[..<toIndex])
+    }
+    
+    func substring(with r: Range<Int>) -> String {
+        let startIndex = index(from: r.lowerBound)
+        let endIndex = index(from: r.upperBound)
+        return String(self[startIndex..<endIndex])
+    }
+}
+
+

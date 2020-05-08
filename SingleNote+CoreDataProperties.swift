@@ -17,8 +17,8 @@ extension SingleNoteMO {
         return NSFetchRequest<SingleNoteMO>(entityName: "SingleNoteMO")
     }
 
-    @NSManaged public var title: String?
-    @NSManaged public var text: String?
+    @NSManaged public var title: String!
+    @NSManaged public var text: String!
     @NSManaged public var creationTimeStamp: Date!
     @NSManaged public var editingTimeStamp: Date!
     @NSManaged public var uuidString: UUID!

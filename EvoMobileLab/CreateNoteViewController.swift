@@ -29,17 +29,14 @@ class CreateNoteViewController: UIViewController {
     }
     
     @objc func manageNotesActions(sender: UIBarButtonItem) {
-        
-        if currentState == .create {
+        switch currentState {
+        case .create:
             guard let titleText = titleField.text, !titleText.isEmpty, let descriptionText = noteField.text, !descriptionText.isEmpty else { return }
             noteDelegate!.createNote(title: titleText, text: descriptionText, creationStamp: Date(), editingStamp: Date(), uuidString: UUID())
-        }
-         
-        if currentState == .display  {
+        case .display:
             guard let titleText = titleField.text, let descriptionText = noteField.text else { return }
             shareNote(title: titleText, text: descriptionText)
-            
-       } else {
+        case .edit:
             guard let titleText = titleField.text, let descriptionText = noteField.text else { return }
             noteDelegate!.updateNote(title: titleText, text: descriptionText, editingStamp: Date())
             currentState = .display
