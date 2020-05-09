@@ -119,7 +119,7 @@ extension CreateNoteViewController {
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         return currentState != .display
     }
-    
+    //1
 }
 
 
