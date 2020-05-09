@@ -61,7 +61,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         vc.currentState = .display
         vc.noteDelegate = self
-        vc.noteTitle =  model.value(forKeyPath: "title") as! String
         vc.noteText = model.value(forKeyPath: "text") as! String
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -79,7 +78,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.selectedNoteUUID = model.uuidString
             vc.currentState = .edit
             vc.noteDelegate = self
-            vc.noteTitle = model.title!
             vc.noteText = model.text!
             completionHandler(true)
             self.navigationController?.pushViewController(vc, animated: true)
@@ -121,8 +119,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             print("Corrupted dateLabel again")
         }
-        cell.titleLabel?.text = model.value(forKeyPath: "title") as? String
-        cell.noteLabel?.text = limitLabel(input: (model.value(forKeyPath: "text") as? String)!) 
+        cell.noteLabel.adjustsFontSizeToFitWidth = true
+        cell.noteLabel?.text = limitLabel(input: (model.value(forKeyPath: "text") as? String)!)
         return cell
     }
     
@@ -196,7 +194,7 @@ extension ViewController {
     
     func limitLabel(input: String) -> String {
         if input.count > 100 {
-            return input.substring(with: 1..<101)
+            return input.substring(with: 0..<100)
         } else {
             return input
         }
@@ -205,10 +203,9 @@ extension ViewController {
 
 extension ViewController: NoteDelegate {
     
-    func createNote(title: String, text: String, creationStamp: Date, editingStamp: Date, uuidString: UUID) {
+    func createNote(text: String, creationStamp: Date, editingStamp: Date, uuidString: UUID) {
         let entity = NSEntityDescription.entity(forEntityName: "SingleNote", in: self.context)!
         let note = SingleNoteMO(entity: entity, insertInto: self.context)
-        note.setValue(title, forKeyPath: "title")
         note.setValue(text, forKeyPath: "text")
         note.setValue(creationStamp, forKey: "creationTimeStamp")
         note.setValue(uuidString, forKey: "uuidString")
@@ -223,10 +220,9 @@ extension ViewController: NoteDelegate {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func updateNote(title: String, text: String, editingStamp: Date) {
+    func updateNote(text: String, editingStamp: Date) {
         models.forEach { model in
             if (selectedNoteUUID == model.uuidString) {
-                model.title = title
                 model.text = text
                 model.editingTimeStamp = editingStamp
                 do {
